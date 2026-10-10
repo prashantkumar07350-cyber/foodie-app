@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/restaurants/<int:restaurant_id>/menu/', RestaurantMenuView.as_view()),
     path('api/menu/', include('apps.menu.urls')),
     path('api/cart/', include('apps.cart.urls')),
+    path('api/orders/', include('apps.orders.urls')),
 ]
 
 if settings.DEBUG:
