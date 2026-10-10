@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/restaurants/', include('apps.restaurants.urls')),
     path('api/restaurants/<int:restaurant_id>/menu/', RestaurantMenuView.as_view()),
     path('api/menu/', include('apps.menu.urls')),
+    path('api/cart/', include('apps.cart.urls')),
 ]
 
 if settings.DEBUG:
