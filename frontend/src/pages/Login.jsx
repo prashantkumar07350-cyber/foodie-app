@@ -15,8 +15,8 @@ export default function Login() {
     setError('')
     setLoading(true)
     try {
-      await login(email, password)
-      navigate('/')
+        const u = await login(email, password)
+         navigate(u.role === 'RESTAURANT' ? '/owner' : '/')
     } catch {
       setError('Email ya password galat hai.')
     } finally {

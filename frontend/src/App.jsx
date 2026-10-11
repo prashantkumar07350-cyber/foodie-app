@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import Menu from './pages/Menu'
 import Orders from './pages/Orders'
 import Register from './pages/Register'
+import Dashboard from './pages/owner/Dashboard'
+import MenuManage from './pages/owner/MenuManage'
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/owner" element={<Dashboard />} />
+          <Route path="/owner/menu" element={<MenuManage />} />
         </Routes>
       </main>
     </div>

@@ -23,6 +23,12 @@ export default function Navbar() {
               <Link to="/cart" className="text-gray-700">Cart ({count})</Link>
             </>
           )}
+          {user?.role === 'RESTAURANT' && (
+            <>
+              <Link to="/owner" className="text-gray-700">Dashboard</Link>
+              <Link to="/owner/menu" className="text-gray-700">Menu</Link>
+            </>
+          )}
           {user ? (
             <>
               <span className="text-gray-600">{user.first_name || user.email} ({user.role})</span>
