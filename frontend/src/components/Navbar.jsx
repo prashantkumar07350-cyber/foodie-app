@@ -1,8 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
 
 export default function Navbar() {
   const { user, logout } = useAuth()
+  const { count } = useCart()
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -13,25 +15,23 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-orange-600">
-          🍔 Foodie
-        </Link>
+        <Link to="/" className="text-xl font-bold text-orange-600">🍔 Foodie</Link>
         <div className="flex items-center gap-4 text-sm">
+          {user?.role === 'CUSTOMER' && (
+            <>
+              <Link to="/orders" className="text-gray-700">Orders</Link>
+              <Link to="/cart" className="text-gray-700">Cart ({count})</Link>
+            </>
+          )}
           {user ? (
             <>
-              <span className="text-gray-600">
-                {user.first_name || user.email} ({user.role})
-              </span>
-              <button onClick={handleLogout} className="bg-gray-800 text-white px-3 py-1 rounded">
-                Logout
-              </button>
+              <span className="text-gray-600">{user.first_name || user.email} ({user.role})</span>
+              <button onClick={handleLogout} className="bg-gray-800 text-white px-3 py-1 rounded">Logout</button>
             </>
           ) : (
             <>
               <Link to="/login" className="text-gray-700">Login</Link>
-              <Link to="/register" className="bg-orange-600 text-white px-3 py-1 rounded">
-                Register
-              </Link>
+              <Link to="/register" className="bg-orange-600 text-white px-3 py-1 rounded">Register</Link>
             </>
           )}
         </div>

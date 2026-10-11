@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
   const [restaurants, setRestaurants] = useState([])
@@ -41,7 +42,7 @@ export default function Home() {
 
       <div className="grid sm:grid-cols-2 gap-4">
         {restaurants.map((r) => (
-          <div key={r.id} className="bg-white rounded shadow overflow-hidden">
+          <Link key={r.id} to={`/restaurant/${r.id}`} className="block bg-white rounded shadow overflow-hidden hover:shadow-md">
             {r.image ? (
               <img src={r.image} alt={r.name} className="h-40 w-full object-cover" />
             ) : (
@@ -59,7 +60,7 @@ export default function Home() {
                 Delivery Rs {r.delivery_fee} • Min order Rs {r.min_order}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
