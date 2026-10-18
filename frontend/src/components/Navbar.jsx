@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-orange-600">🍔 Foodie</Link>
+      <Link to="/" className="font-display text-xl font-bold text-orange-600">🍽️ The Good Plate</Link>
         <div className="flex items-center gap-4 text-sm">
           {user?.role === 'CUSTOMER' && (
             <>

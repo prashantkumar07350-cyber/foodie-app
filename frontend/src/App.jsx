@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import BottomNav from './components/BottomNav'
 import Navbar from './components/Navbar'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
@@ -14,7 +15,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="max-w-5xl mx-auto px-4 py-6">
+      <main className="max-w-5xl mx-auto px-4 py-6 pb-24 md:pb-6">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/owner/menu" element={<MenuManage />} />
         </Routes>
       </main>
+      <BottomNav />
     </div>
   )
 }
