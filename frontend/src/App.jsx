@@ -19,6 +19,7 @@ import Profile from './pages/Profile'
 import SavedAddresses from './pages/SavedAddresses'
 import About from './pages/About'
 import Help from './pages/Help'
+import NotFound from './pages/NotFound'
 
 // In pages par Navbar aur BottomNav nahi dikhte (full-screen pages)
 const BARE_PAGES = ['/splash', '/onboarding']
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/addresses" element={<SavedAddresses />} />
           <Route path="/about" element={<About />} />
           <Route path="/help" element={<Help />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       {!bare && <BottomNav />}
