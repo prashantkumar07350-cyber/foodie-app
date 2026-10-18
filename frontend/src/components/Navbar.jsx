@@ -25,11 +25,17 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-8 text-sm">
           <NavLink to="/" end className={link}>Home</NavLink>
-          {user?.role === 'CUSTOMER' && <NavLink to="/orders" className={link}>My Orders</NavLink>}
+          {user?.role === 'CUSTOMER' && (
+            <>
+              <NavLink to="/orders" className={link}>My Orders</NavLink>
+              <NavLink to="/booking" className={link}>Book a Table</NavLink>
+            </>
+          )}
           {user?.role === 'RESTAURANT' && (
             <>
               <NavLink to="/owner" end className={link}>Dashboard</NavLink>
               <NavLink to="/owner/menu" className={link}>Menu</NavLink>
+              <NavLink to="/owner/bookings" className={link}>Bookings</NavLink>
             </>
           )}
         </div>

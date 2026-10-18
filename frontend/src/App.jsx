@@ -20,6 +20,8 @@ import SavedAddresses from './pages/SavedAddresses'
 import About from './pages/About'
 import Help from './pages/Help'
 import NotFound from './pages/NotFound'
+import Booking from './pages/Booking'
+import OwnerBookings from './pages/owner/OwnerBookings'
 
 // In pages par Navbar aur BottomNav nahi dikhte (full-screen pages)
 const BARE_PAGES = ['/splash', '/onboarding']
@@ -52,6 +54,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/help" element={<Help />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/owner/bookings" element={<OwnerBookings />} />
         </Routes>
       </main>
       {!bare && <BottomNav />}
