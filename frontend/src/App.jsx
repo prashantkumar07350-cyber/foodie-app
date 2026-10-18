@@ -11,9 +11,10 @@ import Register from './pages/Register'
 import Splash from './pages/Splash'
 import Dashboard from './pages/owner/Dashboard'
 import MenuManage from './pages/owner/MenuManage'
+import Onboarding from './pages/Onboarding'
 
 // In pages par Navbar aur BottomNav nahi dikhte (full-screen pages)
-const BARE_PAGES = ['/splash']
+const BARE_PAGES = ['/splash', '/onboarding']
 
 export default function App() {
   const { pathname } = useLocation()
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/owner" element={<Dashboard />} />
           <Route path="/owner/menu" element={<MenuManage />} />
+          <Route path="/onboarding" element={<Onboarding />} />
         </Routes>
       </main>
       {!bare && <BottomNav />}

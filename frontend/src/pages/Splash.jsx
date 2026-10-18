@@ -6,7 +6,10 @@ export default function Splash() {
 
   useEffect(() => {
     // Page 2 (Onboarding) banne ke baad yahan '/onboarding' hoga
-    const t = setTimeout(() => navigate('/', { replace: true }), 2500)
+        const t = setTimeout(() => {
+      const seen = localStorage.getItem('onboarded')
+      navigate(seen ? '/' : '/onboarding', { replace: true })
+    }, 2500)
     return () => clearTimeout(t)
   }, [navigate])
 
