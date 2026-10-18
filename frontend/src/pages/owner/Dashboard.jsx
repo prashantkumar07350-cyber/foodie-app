@@ -28,6 +28,8 @@ const emptyForm = {
   delivery_fee: '30', min_order: '150',
 }
 
+const LINK_BTN = 'px-3 py-2 rounded border border-orange-600 text-orange-600'
+
 export default function Dashboard() {
   const { user } = useAuth()
   const [restaurant, setRestaurant] = useState(null)
@@ -50,7 +52,9 @@ export default function Dashboard() {
 
   const loadOrders = useCallback(async () => {
     try {
-      const { data } = await api.get('/orders/restaurant/', { params: filter ? { status: filter } : {} })
+      const { data } = await api.get('/orders/restaurant/', {
+        params: filter ? { status: filter } : {},
+      })
       setOrders(data)
     } catch {
       /* ignore, next poll will retry */
@@ -63,7 +67,7 @@ export default function Dashboard() {
 
   // Naye orders ke liye har 10 second mein refresh
   useEffect(() => {
-    if (!restaurant) return
+    if (!restaurant) return undefined
     loadOrders()
     const t = setInterval(loadOrders, 10000)
     return () => clearInterval(t)
@@ -80,33 +84,35 @@ export default function Dashboard() {
       const { data } = await api.post('/restaurants/', form)
       setRestaurant(data)
     } catch (err) {
-      const d = err.response?.data
+      const d = err.response && err.response.data
       setError(d ? Object.values(d).flat().join(' ') : 'Restaurant nahi bana.')
     }
   }
 
   const toggleOpen = async () => {
-    const { data } = await api.patch(`/restaurants/${restaurant.id}/`, { is_open: !restaurant.is_open })
+    const { data } = await api.patch('/restaurants/' + restaurant.id + '/', {
+      is_open: !restaurant.is_open,
+    })
     setRestaurant(data)
   }
 
   const changeStatus = async (id, status) => {
     setError('')
     try {
-      await api.post(`/orders/${id}/status/`, { status })
+      await api.post('/orders/' + id + '/status/', { status })
       loadOrders()
     } catch (err) {
-      setError(err.response?.data?.detail || 'Status badal nahi paya.')
+      setError((err.response && err.response.data && err.response.data.detail) || 'Status badal nahi paya.')
     }
   }
 
   if (!checked) return <p className="text-gray-500">Loading...</p>
 
   if (!restaurant) {
-    const input = 'w-full border rounded px-3 py-2'
+    const input = 'w-full border border-gray-200 rounded-lg px-3 py-2 bg-white'
     return (
-      <div className="max-w-md mx-auto bg-white p-6 rounded shadow">
-        <h1 className="text-2xl font-bold mb-1">Apna restaurant banao</h1>
+      <div className="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-sm">
+        <h1 className="font-display text-2xl font-bold text-orange-600 mb-1">Apna restaurant banao</h1>
         <p className="text-sm text-gray-500 mb-4">Admin approve karega, uske baad customers ko dikhega.</p>
         {error && <p className="bg-red-100 text-red-700 p-2 rounded mb-3 text-sm">{error}</p>}
         <form onSubmit={createRestaurant} className="space-y-3">
@@ -122,7 +128,7 @@ export default function Dashboard() {
             <input name="delivery_fee" type="number" placeholder="Delivery fee" value={form.delivery_fee} onChange={update} className={input} />
             <input name="min_order" type="number" placeholder="Min order" value={form.min_order} onChange={update} className={input} />
           </div>
-          <button className="w-full bg-orange-600 text-white py-2 rounded">Restaurant banao</button>
+          <button className="w-full bg-orange-600 text-white py-2 rounded-lg">Restaurant banao</button>
         </form>
       </div>
     )
@@ -132,19 +138,18 @@ export default function Dashboard() {
     <div>
       <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
         <div>
-          <h1 className="text-2xl font-bold">{restaurant.name}</h1>
+          <h1 className="font-display text-2xl font-bold text-orange-600">{restaurant.name}</h1>
           <p className="text-sm text-gray-600">
             {restaurant.is_approved ? '✅ Approved' : '⏳ Admin approval baaki hai'}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button onClick={toggleOpen}
-            className={`px-3 py-2 rounded text-white ${restaurant.is_open ? 'bg-green-600' : 'bg-gray-500'}`}>
+            className={'px-3 py-2 rounded text-white ' + (restaurant.is_open ? 'bg-green-600' : 'bg-gray-500')}>
             {restaurant.is_open ? 'Open (band karo)' : 'Closed (kholo)'}
           </button>
-          <Link to="/owner/menu" className="px-3 py-2 rounded border border-orange-600 text-orange-600">
-            Menu manage
-          </Link>
+          <Link to="/owner/menu" className={LINK_BTN}>Menu manage</Link>
+          <Link to="/owner/bookings" className={LINK_BTN}>Bookings</Link>
         </div>
       </div>
 
@@ -153,7 +158,8 @@ export default function Dashboard() {
       <div className="flex gap-2 mb-4 text-sm flex-wrap">
         {['', 'PLACED', 'ACCEPTED', 'PREPARING', 'OUT_FOR_DELIVERY', 'DELIVERED'].map((s) => (
           <button key={s || 'ALL'} onClick={() => setFilter(s)}
-            className={`px-3 py-1 rounded border ${filter === s ? 'bg-orange-600 text-white border-orange-600' : 'bg-white'}`}>
+            className={'px-3 py-1 rounded border ' +
+              (filter === s ? 'bg-orange-600 text-white border-orange-600' : 'bg-white')}>
             {s || 'ALL'}
           </button>
         ))}
@@ -163,14 +169,14 @@ export default function Dashboard() {
 
       <div className="space-y-3">
         {orders.map((o) => (
-          <div key={o.id} className="bg-white rounded shadow p-4">
+          <div key={o.id} className="bg-white rounded-2xl shadow-sm p-4">
             <div className="flex justify-between items-start">
               <div>
-                <p className="font-bold">Order #{o.id}</p>
+                <p className="font-bold">Order #GP{String(o.id).padStart(6, '0')}</p>
                 <p className="text-xs text-gray-500">{new Date(o.created_at).toLocaleString()}</p>
                 <p className="text-sm text-gray-600">{o.customer_email}</p>
               </div>
-              <span className={`text-xs px-2 py-1 rounded ${colors[o.status]}`}>{o.status}</span>
+              <span className={'text-xs px-2 py-1 rounded-full ' + colors[o.status]}>{o.status}</span>
             </div>
             <ul className="text-sm mt-2">
               {o.items.map((i) => (
@@ -184,7 +190,7 @@ export default function Dashboard() {
               <div className="flex gap-2">
                 {(ACTIONS[o.status] || []).map((a) => (
                   <button key={a.status} onClick={() => changeStatus(o.id, a.status)}
-                    className={`${a.cls} text-white text-sm px-3 py-1 rounded`}>
+                    className={a.cls + ' text-white text-sm px-3 py-1 rounded-lg'}>
                     {a.label}
                   </button>
                 ))}
