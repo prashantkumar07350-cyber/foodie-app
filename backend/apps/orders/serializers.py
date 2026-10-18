@@ -21,7 +21,7 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'restaurant', 'restaurant_name', 'customer_email', 'status',
             'delivery_address', 'delivery_phone', 'items', 'subtotal',
-            'delivery_fee', 'discount', 'total', 'note', 'created_at', 'updated_at',
+            'delivery_fee', 'discount', 'total', 'note', 'payment_method', 'created_at', 'updated_at',
         )
         read_only_fields = fields
 
@@ -29,7 +29,7 @@ class OrderSerializer(serializers.ModelSerializer):
 class PlaceOrderSerializer(serializers.Serializer):
     address_id = serializers.IntegerField()
     note = serializers.CharField(max_length=255, required=False, allow_blank=True)
-
+    payment_method = serializers.ChoiceField(choices=['COD'], default='COD')
 
 class StatusUpdateSerializer(serializers.Serializer):
     status = serializers.ChoiceField(choices=[

@@ -66,6 +66,7 @@ class PlaceOrderView(APIView):
             discount=0,
             total=subtotal + delivery_fee,
             note=s.validated_data.get('note', ''),
+            payment_method=s.validated_data['payment_method'],
         )
         OrderItem.objects.bulk_create([
             OrderItem(order=order, food_item=ci.food_item, name=ci.food_item.name,
