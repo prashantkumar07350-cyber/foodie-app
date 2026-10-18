@@ -129,16 +129,17 @@ export default function Menu() {
               const inCart = cartItemFor(item.id)
               return (
                 <div key={item.id} className="bg-white rounded-2xl shadow-sm p-3 flex gap-3">
-                  <div className="w-24 h-24 rounded-xl bg-orange-50 overflow-hidden flex items-center justify-center text-4xl shrink-0">
+                                   <Link to={'/dish/' + item.id}
+                    className="w-24 h-24 rounded-xl bg-orange-50 overflow-hidden flex items-center justify-center text-4xl shrink-0">
                     {item.image
                       ? <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                       : '🍽️'}
-                  </div>
+                  </Link>
                   <div className="flex-1 min-w-0 flex flex-col">
-                    <p className="font-medium">
+                                       <Link to={'/dish/' + item.id} className="font-medium">
                       <span className={item.is_veg ? 'text-green-600' : 'text-red-600'}>●</span>{' '}
                       {item.name}
-                    </p>
+                    </Link>
                     {item.description && (
                       <p className="text-xs text-gray-500 line-clamp-2">{item.description}</p>
                     )}

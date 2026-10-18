@@ -26,6 +26,10 @@ class FoodItem(models.Model):
     is_available = models.BooleanField(default=True)
     image = models.ImageField(upload_to='food/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    ingredients = models.CharField(
+        max_length=255, blank=True,
+        help_text='Comma se alag karo, jaise: Tomato, Mozzarella, Basil',
+    )
 
     class Meta:
         ordering = ['name']

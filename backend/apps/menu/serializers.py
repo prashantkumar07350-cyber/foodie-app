@@ -13,7 +13,7 @@ class FoodItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = FoodItem
         fields = ('id', 'category', 'name', 'description', 'price',
-                  'is_veg', 'is_available', 'image')
+                  'is_veg', 'is_available', 'image', 'ingredients')
 
     def validate_category(self, category):
         # Category usi owner ke restaurant ki honi chahiye

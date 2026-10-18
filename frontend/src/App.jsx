@@ -12,6 +12,7 @@ import Splash from './pages/Splash'
 import Dashboard from './pages/owner/Dashboard'
 import MenuManage from './pages/owner/MenuManage'
 import Onboarding from './pages/Onboarding'
+import Dish from './pages/Dish'
 
 // In pages par Navbar aur BottomNav nahi dikhte (full-screen pages)
 const BARE_PAGES = ['/splash', '/onboarding']
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/owner" element={<Dashboard />} />
           <Route path="/owner/menu" element={<MenuManage />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/dish/:id" element={<Dish />} />
         </Routes>
       </main>
       {!bare && <BottomNav />}

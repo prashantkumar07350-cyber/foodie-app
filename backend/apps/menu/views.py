@@ -88,3 +88,23 @@ class PopularItemsView(APIView):
             for i in items
         ]
         return Response(data)
+
+
+class DishDetailView(APIView):
+    """Public: ek dish ki poori detail."""
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+
+    def get(self, request, pk):
+        item = get_object_or_404(
+            FoodItem.objects.select_related('restaurant'),
+            pk=pk, restaurant__is_approved=True,
+        )
+        data = FoodItemSerializer(item, context={'request': request}).data
+        data['restaurant_id'] = item.restaurant_id
+        data['restaurant_name'] = item.restaurant.name
+        data['restaurant_is_open'] = item.restaurant.is_open
+        data['ingredients_list'] = [
+            x.strip() for x in item.ingredients.split(',') if x.strip()
+        ]
+        return Response(data)
