@@ -67,13 +67,13 @@ export default function Checkout() {
     setError('')
     setLoading(true)
     try {
-      await api.post('/orders/place/', {
+        const { data } = await api.post('/orders/place/', {
         address_id: selected,
         note,
         payment_method: method,
       })
       await refresh()
-      navigate('/orders')
+      navigate('/order-confirmation/' + data.id, { replace: true })
     } catch (err) {
       const d = err.response && err.response.data
       setError((d && d.detail) || 'Order place nahi hua.')
