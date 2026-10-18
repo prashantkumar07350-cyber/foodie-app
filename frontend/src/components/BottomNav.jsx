@@ -10,9 +10,11 @@ export default function BottomNav() {
   if (user?.role === 'CUSTOMER') {
     items.push({ to: '/cart', label: `Cart${count ? ` (${count})` : ''}`, icon: '🛒' })
     items.push({ to: '/orders', label: 'Orders', icon: '📋' })
+    items.push({ to: '/profile', label: 'Profile', icon: '👤' })
   } else if (user?.role === 'RESTAURANT') {
     items.push({ to: '/owner', label: 'Orders', icon: '📋' })
     items.push({ to: '/owner/menu', label: 'Menu', icon: '🍴' })
+    items.push({ to: '/profile', label: 'Profile', icon: '👤' })
   } else if (!user) {
     items.push({ to: '/login', label: 'Login', icon: '👤' })
   }

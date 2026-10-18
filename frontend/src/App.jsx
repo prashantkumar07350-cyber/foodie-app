@@ -15,6 +15,8 @@ import Onboarding from './pages/Onboarding'
 import Dish from './pages/Dish'
 import OrderConfirmation from './pages/OrderConfirmation'
 import OrderDetail from './pages/OrderDetail'
+import Profile from './pages/Profile'
+import SavedAddresses from './pages/SavedAddresses'
 
 // In pages par Navbar aur BottomNav nahi dikhte (full-screen pages)
 const BARE_PAGES = ['/splash', '/onboarding']
@@ -42,6 +44,8 @@ export default function App() {
           <Route path="/dish/:id" element={<Dish />} />
           <Route path="/order-confirmation/:id" element={<OrderConfirmation />} />
           <Route path="/orders/:id" element={<OrderDetail />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/addresses" element={<SavedAddresses />} />
         </Routes>
       </main>
       {!bare && <BottomNav />}

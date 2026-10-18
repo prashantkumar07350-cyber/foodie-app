@@ -37,7 +37,9 @@ export default function Navbar() {
         <div className="flex items-center gap-3 text-sm">
           {user ? (
             <>
-              <span className="hidden sm:inline text-white/80">{user.first_name || user.email}</span>
+              <Link to="/profile" className="hidden sm:inline text-white/80 hover:text-white">
+                {user.first_name || user.email}
+              </Link>
               {user.role === 'CUSTOMER' && (
                 <Link to="/cart" className="bg-[#e8c07d] text-[#0d2620] font-semibold px-4 py-2 rounded-full">
                   🛒 Cart ({count})
