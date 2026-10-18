@@ -19,8 +19,8 @@ export default function Navbar() {
     <nav className="bg-[#0d2620] text-white">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
         <Link to="/" className="leading-tight">
-          <span className="font-display text-2xl font-bold">🌿 Tastora</span>
-          <span className="block text-[10px] text-white/70">Good Food • Great Moments</span>
+          <span className="font-display text-2xl font-bold italic">🍽️ The Good Plate</span>
+          <span className="block text-[10px] text-white/70">Good Food • Great Mood</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-sm">
