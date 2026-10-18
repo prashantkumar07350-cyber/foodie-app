@@ -16,3 +16,8 @@
 body {
   background: #faf8f3;
 }
+
+@keyframes splash-load {
+  from { width: 0; }
+  to { width: 100%; }
+}

@@ -3,6 +3,7 @@ from rest_framework import permissions, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db.models import Count
 
 from apps.restaurants.models import Restaurant
 from apps.restaurants.permissions import IsRestaurantOwner
@@ -56,3 +57,34 @@ class RestaurantMenuView(APIView):
             'restaurant': {'id': restaurant.id, 'name': restaurant.name, 'is_open': restaurant.is_open},
             'menu': menu,
         })
+
+
+class PopularItemsView(APIView):
+    """Public: sabse zyada order hui dishes (approved aur open restaurants se)."""
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []  # expired token se public page par 401 na aaye
+
+    def get(self, request):
+        items = (
+            FoodItem.objects.filter(
+                is_available=True,
+                restaurant__is_approved=True,
+                restaurant__is_open=True,
+            )
+            .select_related('restaurant')
+            .annotate(sold=Count('orderitem'))
+            .order_by('-sold', '-created_at')[:4]
+        )
+        data = [
+            {
+                'id': i.id,
+                'name': i.name,
+                'price': str(i.price),
+                'is_veg': i.is_veg,
+                'image': request.build_absolute_uri(i.image.url) if i.image else None,
+                'restaurant_id': i.restaurant_id,
+                'restaurant_name': i.restaurant.name,
+            }
+            for i in items
+        ]
+        return Response(data)
