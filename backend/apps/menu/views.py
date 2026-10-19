@@ -54,7 +54,13 @@ class RestaurantMenuView(APIView):
             if items:
                 menu.append({'id': cat.id, 'name': cat.name, 'items': items})
         return Response({
-            'restaurant': {'id': restaurant.id, 'name': restaurant.name, 'is_open': restaurant.is_open},
+            'restaurant': {
+                'id': restaurant.id,
+                'name': restaurant.name,
+                'is_open': restaurant.is_open,
+                'avg_rating': str(restaurant.avg_rating),
+                'review_count': restaurant.reviews.count(),
+            },
             'menu': menu,
         })
 
