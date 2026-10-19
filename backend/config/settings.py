@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'apps.orders',
     'apps.bookings',
     'apps.reviews',
+    'apps.adminpanel',
 ]
 
 MIDDLEWARE = [

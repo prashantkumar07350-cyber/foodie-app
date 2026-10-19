@@ -38,6 +38,7 @@ export default function Navbar() {
               <NavLink to="/owner/bookings" className={link}>Bookings</NavLink>
             </>
           )}
+          {user?.role === 'ADMIN' && <NavLink to="/admin-panel" className={link}>Admin</NavLink>}
         </div>
 
         <div className="flex items-center gap-3 text-sm">

@@ -22,6 +22,7 @@ import Help from './pages/Help'
 import NotFound from './pages/NotFound'
 import Booking from './pages/Booking'
 import OwnerBookings from './pages/owner/OwnerBookings'
+import AdminDashboard from './pages/admin/AdminDashboard'
 
 // In pages par Navbar aur BottomNav nahi dikhte (full-screen pages)
 const BARE_PAGES = ['/splash', '/onboarding']
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/owner/bookings" element={<OwnerBookings />} />
+          <Route path="/admin-panel" element={<AdminDashboard />} />
         </Routes>
       </main>
       {!bare && <BottomNav />}

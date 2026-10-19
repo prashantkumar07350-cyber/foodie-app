@@ -26,7 +26,7 @@ export default function Login() {
       const u = await login(email, password)
       if (remember) localStorage.setItem('remember_email', email)
       else localStorage.removeItem('remember_email')
-      navigate(u.role === 'RESTAURANT' ? '/owner' : '/')
+      navigate(u.role === 'RESTAURANT' ? '/owner' : u.role === 'ADMIN' ? '/admin-panel' : '/')
     } catch {
       setError('Email ya password galat hai.')
     } finally {
