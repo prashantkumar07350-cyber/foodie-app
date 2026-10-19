@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
+import RestaurantReviews from '../components/RestaurantReviews'
 
 const BTN_ROUND = 'w-8 h-8 rounded-full bg-orange-600 text-white text-lg leading-none'
 const BTN_MINUS = 'w-8 h-8 rounded-full border border-orange-600 text-orange-600 text-lg leading-none'
@@ -84,9 +85,17 @@ export default function Menu() {
     <div className="pb-20">
       <Link to="/" className="text-sm text-orange-600">← Back</Link>
       <h1 className="font-display text-3xl font-bold text-orange-600 mt-1">Our Menu</h1>
-      <p className="text-sm text-gray-500">
+           <p className="text-sm text-gray-500">
         {data.restaurant.name} • Freshly prepared. Always delicious.
       </p>
+      <RestaurantReviews restaurantId={id} />
+      {data.restaurant.review_count > 0 && (
+        <p className="text-sm mt-1">
+          <span className="text-[#e8a317]">★</span>{' '}
+          <b>{data.restaurant.avg_rating}</b>{' '}
+          <span className="text-gray-500">({data.restaurant.review_count} reviews)</span>
+        </p>
+      )}
 
       {closed && (
         <p className="bg-gray-200 text-gray-700 p-2 rounded mt-3 text-sm">

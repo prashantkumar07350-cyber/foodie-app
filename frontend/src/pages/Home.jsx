@@ -220,7 +220,10 @@ export default function Home() {
                     {r.is_open ? 'Open' : 'Closed'}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600">{r.cuisine} • {r.city}</p>
+                <p className="text-sm text-gray-600">
+                  {r.cuisine} • {r.city}
+                  {Number(r.avg_rating) > 0 && <span> • <span className="text-[#e8a317]">★</span> {r.avg_rating}</span>}
+                </p>
                 <p className="text-sm text-gray-500 mt-1">
                   Delivery Rs {r.delivery_fee} • Min Rs {r.min_order}
                 </p>

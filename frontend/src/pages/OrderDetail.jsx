@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'
+import ReviewBox from '../components/ReviewBox'
 
 const STEPS = [
   ['PLACED', 'Order placed'],
@@ -102,7 +103,7 @@ export default function OrderDetail() {
         {order.note && <p><span className="text-gray-500">Note:</span> {order.note}</p>}
         <p className="text-gray-400">{new Date(order.created_at).toLocaleString()}</p>
       </section>
-
+      {order.status === 'DELIVERED' && <ReviewBox orderId={order.id} />}
       {order.status === 'PLACED' && (
         <button onClick={cancel}
           className="w-full border border-red-300 text-red-600 py-3 rounded-lg">
