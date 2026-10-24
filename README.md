@@ -18,9 +18,9 @@ Customers browse restaurants, order food and book tables. Restaurant owners mana
 |---|---|---|
 | ![Checkout](docs/screenshots/checkout.png) | ![Confirmation](docs/screenshots/confirmation.png) | ![Orders](docs/screenshots/orders.png) |
 
-| Owner Dashboard | Admin Dashboard | Table Booking |
-|---|---|---|
-| ![Owner](docs/screenshots/owner.png) | ![Admin](docs/screenshots/admin.png) | ![Booking](docs/screenshots/booking.png) |
+| Owner Dashboard | Table Booking |
+|---|---|
+| ![Owner](docs/screenshots/owner.png) | ![Booking](docs/screenshots/booking.png) |
 
 ---
 
