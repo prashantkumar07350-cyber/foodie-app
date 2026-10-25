@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from apps.menu.views import RestaurantMenuView
+from apps.adminpanel.views import PublicStatsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,6 +17,7 @@ urlpatterns = [
     path('api/bookings/', include('apps.bookings.urls')),
     path('api/reviews/', include('apps.reviews.urls')),
     path('api/admin-panel/', include('apps.adminpanel.urls')),
+    path('api/stats/', PublicStatsView.as_view()),
 ]
 
 if settings.DEBUG:

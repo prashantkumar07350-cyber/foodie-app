@@ -23,7 +23,7 @@ class ReviewListCreateView(ListCreateAPIView):
         return [permissions.AllowAny()]
 
     def get_queryset(self):
-        qs = Review.objects.select_related('customer')
+        qs = Review.objects.select_related('customer', 'restaurant')
         restaurant = self.request.query_params.get('restaurant')
         order = self.request.query_params.get('order')
         if restaurant:

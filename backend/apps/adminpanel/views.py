@@ -1,11 +1,12 @@
-from django.db.models import Sum
+from django.db.models import Avg, Sum
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from apps.orders.models import Order
 from apps.restaurants.models import Restaurant
 from apps.users.models import User
+from apps.reviews.models import Review
+
 
 
 class IsAdminRole(permissions.BasePermission):
@@ -72,3 +73,18 @@ class ApproveRestaurantView(APIView):
         r.is_approved = bool(request.data.get('approved', True))
         r.save(update_fields=['is_approved'])
         return Response({'id': r.id, 'is_approved': r.is_approved})
+
+
+class PublicStatsView(APIView):
+    """Public: homepage ke liye asli numbers."""
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+
+    def get(self, request):
+        avg = Review.objects.aggregate(a=Avg('rating'))['a'] or 0
+        return Response({
+            'restaurants': Restaurant.objects.filter(is_approved=True).count(),
+            'delivered': Order.objects.filter(status='DELIVERED').count(),
+            'reviews': Review.objects.count(),
+            'avg_rating': round(avg, 1),
+        })

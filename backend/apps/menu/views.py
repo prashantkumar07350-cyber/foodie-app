@@ -86,7 +86,7 @@ class PopularItemsView(APIView):
                 'id': i.id,
                 'name': i.name,
                 'price': str(i.price),
-                'is_veg': i.is_veg,
+                'sold': i.sold,
                 'image': request.build_absolute_uri(i.image.url) if i.image else None,
                 'restaurant_id': i.restaurant_id,
                 'restaurant_name': i.restaurant.name,

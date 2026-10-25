@@ -4,12 +4,13 @@ from .models import Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    restaurant_name = serializers.CharField(source='restaurant.name', read_only=True)
     customer_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Review
-        fields = ('id', 'order', 'restaurant', 'customer_name', 'rating',
-                  'comment', 'created_at')
+        fields = ('id', 'order', 'restaurant', 'restaurant_name', 'customer_name',
+                  'rating', 'comment', 'created_at')
         read_only_fields = ('id', 'restaurant', 'created_at')
 
     def get_customer_name(self, obj):
