@@ -21,3 +21,73 @@ body {
   from { width: 0; }
   to { width: 100%; }
 }
+
+/* ---------- Dark mode ---------- */
+html, body { transition: background-color .25s ease, color .25s ease; }
+
+html.dark { color-scheme: dark; }
+.dark body,
+.dark .min-h-screen { background-color: #0f0e20 !important; color: #ece9ff !important; }
+
+/* Backgrounds */
+.dark [class~="bg-gray-50"],
+.dark [class~="bg-\[\#faf8f3\]"],
+.dark [class~="bg-\[\#eef4f1\]"] { background-color: #0f0e20 !important; }
+
+.dark [class~="bg-white"] { background-color: #1c1a38 !important; }
+
+.dark [class~="bg-\[\#f1eefc\]"],
+.dark [class~="bg-orange-50"],
+.dark [class~="bg-orange-100"],
+.dark [class~="bg-gray-100"],
+.dark [class~="bg-gray-200"] { background-color: #26234a !important; }
+
+.dark [class~="bg-\[\#17152E\]"] { background-color: #0a0918 !important; }
+
+/* Text */
+.dark [class~="text-black"],
+.dark [class~="text-\[\#17152E\]"],
+.dark [class~="text-orange-600"],
+.dark h1, .dark h2, .dark h3 { color: #ece9ff !important; }
+
+.dark [class~="text-gray-400"],
+.dark [class~="text-gray-500"],
+.dark [class~="text-gray-600"],
+.dark [class~="text-gray-700"] { color: #b9b5d9 !important; }
+
+/* Coral buttons keep dark text */
+.dark [class~="bg-\[\#FF8066\]"] { color: #17152E !important; }
+
+/* Main (navy) buttons become lavender so they stay visible */
+.dark [class~="bg-orange-600"] { background-color: #b7a5ff !important; color: #17152E !important; }
+.dark [class~="border-orange-600"] { border-color: #b7a5ff !important; }
+.dark [class~="text-white"][class~="bg-orange-600"] { color: #17152E !important; }
+
+/* Borders */
+.dark [class~="border"],
+.dark [class~="border-t"],
+.dark [class~="border-b"],
+.dark [class~="border-gray-100"],
+.dark [class~="border-gray-200"],
+.dark [class~="border-gray-300"] { border-color: #34305c !important; }
+.dark [class~="divide-y"] > * { border-color: #34305c !important; }
+
+/* Form fields */
+.dark input, .dark select, .dark textarea {
+  background-color: #1c1a38 !important;
+  color: #ece9ff !important;
+  border-color: #34305c !important;
+}
+.dark input::placeholder, .dark textarea::placeholder { color: #8f8bb5 !important; }
+
+/* Status badges and alerts stay readable */
+.dark [class~="bg-green-100"] { background-color: rgba(34,197,94,.18) !important; color: #86efac !important; }
+.dark [class~="bg-blue-100"] { background-color: rgba(96,165,250,.18) !important; color: #93c5fd !important; }
+.dark [class~="bg-indigo-100"] { background-color: rgba(129,140,248,.2) !important; color: #c7d2fe !important; }
+.dark [class~="bg-yellow-100"] { background-color: rgba(250,204,21,.16) !important; color: #fde68a !important; }
+.dark [class~="bg-purple-100"] { background-color: rgba(192,132,252,.2) !important; color: #e9d5ff !important; }
+.dark [class~="bg-red-100"],
+.dark [class~="bg-red-50"] { background-color: rgba(248,113,113,.16) !important; color: #fca5a5 !important; }
+
+/* Cards get a softer shadow in dark */
+.dark [class~="shadow-sm"] { box-shadow: 0 1px 3px rgba(0,0,0,.5) !important; }
