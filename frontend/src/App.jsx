@@ -5,7 +5,6 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import Menu from './pages/Menu'
 import Orders from './pages/Orders'
 import Register from './pages/Register'
 import Splash from './pages/Splash'
@@ -23,6 +22,8 @@ import NotFound from './pages/NotFound'
 import Booking from './pages/Booking'
 import OwnerBookings from './pages/owner/OwnerBookings'
 import AdminDashboard from './pages/admin/AdminDashboard'
+import Services from './pages/Services'
+import Menu from './pages/Menu'
 
 // In pages par Navbar aur BottomNav nahi dikhte (full-screen pages)
 const BARE_PAGES = ['/splash', '/onboarding']
@@ -58,6 +59,8 @@ export default function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/owner/bookings" element={<OwnerBookings />} />
           <Route path="/admin-panel" element={<AdminDashboard />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/menu" element={<Menu />} />
         </Routes>
       </main>
       {!bare && <BottomNav />}
